@@ -1,0 +1,22 @@
+h1 {
+  text-align: center;
+}
+
+img {
+  height: 300px;
+  margin: 0 10px;
+  display: flex;
+}
+
+div {
+  display: flex;
+}
+
+#images-holder {
+  display: flex;
+  justify-content: center;
+}
+
+footer {
+  text-align: center;
+}
