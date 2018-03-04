@@ -20,34 +20,21 @@ function loadImage() {
       threeImages.push(randomImage);
     }
   }
-  console.log(threeImages);
+  return threeImages;
 }
 
 //function to display results from loadImage function on page
 function buildCarousel() {
-  var image = loadImage();
-    document.getElementById('images-holder').appendChild(image);
+  var threeImages = loadImage();
+  var image = document.createElement('img');
+  image.src = threeImages[0];
+  document.getElementById('images-holder').appendChild(image);
+  image = document.createElement('img');
+  image.src = threeImages[1];
+  document.getElementById('images-holder').appendChild(image);
+  image = document.createElement('img');
+  image.src = threeImages[2];
+  document.getElementById('images-holder').appendChild(image);
 }
 
-buildCarousel();
-
-window.addEventListener('load', loadImage);
-
-
-
-//   var image = document.createElement('img');
-//   image.setAttribute('src', './images/bag.jpg');
-//   document.getElementById('images-holder').appendChild(image);
-//   image = document.createElement('img');
-//   image.setAttribute('src', './images/banana.jpg');
-//   document.getElementById('images-holder').appendChild(image);
-//   image = document.createElement('img');
-//   image.setAttribute('src', './images/cthulhu.jpg');
-//   document.getElementById('images-holder').appendChild(image);
-
-
-// for(var imagesIndex = 0; imagesIndex < images.length; imagesIndex++) {
-//   var image = document.createElement('img');
-//   image.setAttribute('src', './images/bag.jpg');
-//   document.getElementById('images-holder').appendChild(image);
-// }
+window.addEventListener('load', buildCarousel);
