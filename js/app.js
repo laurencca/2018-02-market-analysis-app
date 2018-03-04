@@ -24,16 +24,50 @@ function loadImage() {
 }
 
 //function to display results from loadImage function on page
-function buildCarousel() {
-  var image = loadImage();
-    document.getElementById('images-holder').appendChild(image);
+// function buildCarousel() {
+//   var image = loadImage();
+//     document.getElementById('images-holder').appendChild(image);
+// }
+
+// buildCarousel();
+
+var images = [
+  { label: "bag",  y: 10  },
+  { label: "banana", y: 15  },
+  { label: "boots", y: 25  },
+  { label: "chair",  y: 30  },
+  { label: "cthulhu",  y: 28  },
+  { label: "dragon",  y: 50  },
+  { label: "pen",  y: 5  },
+  { label: "scissors",  y: 32  },
+  { label: "shark",  y: 45  },
+  { label: "sweep",  y: 40  },
+  { label: "unicorn",  y: 60  },
+  { label: "usb",  y: 13  },
+  { label: "water_can",  y: 27  },
+  { label: "wine_glass",  y: 33  }
+]
+
+window.addEventListener('load', function() {
+  document.getElementById('show-chart-button').addEventListener('click', loadChart);
+
+})
+
+function loadChart() {
+	var chart = new CanvasJS.Chart("chart-container", {
+		title:{
+			text: "Product Chart"              
+		},
+		data: [              
+		{
+			// Change type to "doughnut", "line", "splineArea", etc.
+			type: "column",
+			dataPoints: images
+		}
+		]
+	});
+	chart.render();
 }
-
-buildCarousel();
-
-window.addEventListener('load', loadImage);
-
-
 
 //   var image = document.createElement('img');
 //   image.setAttribute('src', './images/bag.jpg');
