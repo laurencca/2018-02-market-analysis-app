@@ -1,5 +1,18 @@
+body {
+  background-color: #94b8b8;
+  font-family: 'Palatino', serif;
+}
+
 h1 {
   text-align: center;
+}
+
+h2 {
+  text-decoration: underline;
+}
+
+p {
+  font-size: 20px;
 }
 
 img {
@@ -18,5 +31,6 @@ div {
 }
 
 footer {
+  padding: 30px;
   text-align: center;
 }
