@@ -7,9 +7,9 @@ var voteCounter = 0;
 
 //constructor function for images
 var Image = function(imageName, imageLocation) {
-  this.imageName = imageName;
+  this.label = imageName;
   this.imageLocation = imageLocation;
-  this.vote = 0;
+  this.y = 0;
 }
 
 //images array
@@ -77,34 +77,33 @@ function registerImageClick(event) {
     var imageLocation = event.target.src.substring(index + 1);
     for (var index = 0; index < images.length; index++) {
       if (images[index].imageLocation.indexOf(imageLocation) != -1) {
-        images[index].vote += 1;
+        images[index].y += 1;
         voteCounter += 1;
       }
     }
     if (voteCounter == 15) {
-      alert('Voting Complete! Click "Show Results" button below.');
+      alert('Voting Complete! See results below.')
+      addChart();
     } else {
       buildCarousel();
     }
   }
 }
 
-//function to create a list showing results of voting
-function makeList() {
-  var resultsList = document.getElementById('results-list');
-  var listHeader = '<h3>Results</h3>' + '<ul>';
-  for (var index = 0; index < images.length; index++) {
-    var item = images[index].imageName;
-    listHeader += '<li>' + item + ' received ' + images[index].vote + ' votes' + '</li>';
-  }
-  resultsList.innerHTML += listHeader + '</ul>';
-}
-
-//function to add the list to the page
-function addList() {
-    document.getElementById('list-button').addEventListener('click', makeList);
+function addChart () {
+	var chart = new CanvasJS.Chart('chart-holder', {
+		title:{
+			text: "Bus Mall Voting Results"
+		},
+		data: [
+		{
+			type: "column",
+			dataPoints: images
+		}
+		]
+	});
+	chart.render();
 }
 
 window.addEventListener('load', buildCarousel);
 window.addEventListener('load', addListener);
-window.addEventListener('load', addList);
