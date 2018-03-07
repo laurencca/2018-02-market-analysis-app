@@ -1,5 +1,18 @@
+body {
+  background-color: #94b8b8;
+  font-family: 'Montserrat', sans-serif;
+}
+
 h1 {
   text-align: center;
+}
+
+h2 {
+  text-decoration: underline;
+}
+
+p {
+  font-size: 20px;
 }
 
 img {
@@ -17,6 +30,12 @@ div {
   justify-content: center;
 }
 
+#results-button {
+  display: flex;
+  justify-content: center;
+}
+
 footer {
+  padding: 30px;
   text-align: center;
 }
