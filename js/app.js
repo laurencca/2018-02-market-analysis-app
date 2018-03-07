@@ -3,6 +3,7 @@
 var imageName = '';
 var imageLocation = '';
 var carousel = document.getElementById('images-holder');
+var voteCounter = 0;
 
 //constructor function for images
 var Image = function(imageName, imageLocation) {
@@ -13,20 +14,20 @@ var Image = function(imageName, imageLocation) {
 
 //images array
 var images = [];
-images.push(new Image('bag', 'bag.jpg'))
-images.push(new Image('banana', 'banana.jpg'))
-images.push(new Image('boots', 'boots.jpg'))
-images.push(new Image('chair', 'chair.jpg'))
-images.push(new Image('cthulhu', 'cthulhu.jpg'))
-images.push(new Image('dragon', 'dragon.jpg'))
-images.push(new Image('pen', 'pen.jpg'))
-images.push(new Image('scissors', 'scissors.jpg'))
-images.push(new Image('shark', 'shark.jpg'))
-images.push(new Image('sweep', 'sweep.jpg'))
-images.push(new Image('unicorn', 'unicorn.jpg'))
-images.push(new Image('usb', 'usb.jpg'))
-images.push(new Image('water_can', 'water_can.jpg'))
-images.push(new Image('wine_glass', 'wine_glass.jpg'))
+images.push(new Image('Bag', 'bag.jpg'))
+images.push(new Image('Banana', 'banana.jpg'))
+images.push(new Image('Boots', 'boots.jpg'))
+images.push(new Image('Chair', 'chair.jpg'))
+images.push(new Image('Cthulhu', 'cthulhu.jpg'))
+images.push(new Image('Dragon', 'dragon.jpg'))
+images.push(new Image('Pen', 'pen.jpg'))
+images.push(new Image('Scissors', 'scissors.jpg'))
+images.push(new Image('Shark', 'shark.jpg'))
+images.push(new Image('Sweep', 'sweep.jpg'))
+images.push(new Image('Unicorn', 'unicorn.jpg'))
+images.push(new Image('Usb', 'usb.jpg'))
+images.push(new Image('Water Can', 'water_can.jpg'))
+images.push(new Image('Wine Glass', 'wine_glass.jpg'))
 
 //function to get one random image from the images array
 function getRandomImage() {
@@ -69,22 +70,41 @@ function addListener() {
   document.getElementById('images-holder').addEventListener('click', registerImageClick);
 }
 
+//function to track which images are clicked and stop voting after 15 rounds
 function registerImageClick(event) {
   if (event.target.tagName == 'IMG') {
     var index = event.target.src.lastIndexOf("/");
     var imageLocation = event.target.src.substring(index + 1);
-    console.log(imageLocation);
     for (var index = 0; index < images.length; index++) {
       if (images[index].imageLocation.indexOf(imageLocation) != -1) {
         images[index].vote += 1;
-        console.log(images[index].vote);
+        voteCounter += 1;
       }
     }
-    buildCarousel();
+    if (voteCounter == 15) {
+      alert('Voting Complete! Click "Show Results" button below.');
+    } else {
+      buildCarousel();
+    }
   }
 }
 
+//function to create a list showing results of voting
+function makeList() {
+  var resultsList = document.getElementById('results-list');
+  var listHeader = '<h3>Results</h3>' + '<ul>';
+  for (var index = 0; index < images.length; index++) {
+    var item = images[index].imageName;
+    listHeader += '<li>' + item + ' received ' + images[index].vote + ' votes' + '</li>';
+  }
+  resultsList.innerHTML += listHeader + '</ul>';
+}
 
+//function to add the list to the page
+function addList() {
+    document.getElementById('list-button').addEventListener('click', makeList);
+}
 
 window.addEventListener('load', buildCarousel);
 window.addEventListener('load', addListener);
+window.addEventListener('load', addList);

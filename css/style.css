@@ -1,6 +1,6 @@
 body {
   background-color: #94b8b8;
-  font-family: 'Palatino', serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 h1 {
@@ -26,6 +26,11 @@ div {
 }
 
 #images-holder {
+  display: flex;
+  justify-content: center;
+}
+
+#results-button {
   display: flex;
   justify-content: center;
 }
