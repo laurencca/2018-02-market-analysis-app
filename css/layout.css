@@ -1,0 +1,23 @@
+body {
+  background-color: #94b8b8;
+  font-family: 'Montserrat', sans-serif;
+}
+
+div {
+  display: flex;
+}
+
+#images-holder {
+  display: flex;
+  justify-content: center;
+}
+
+#results-button {
+  display: flex;
+  justify-content: center;
+}
+
+footer {
+  padding: 30px;
+  text-align: center;
+}
