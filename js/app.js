@@ -14,20 +14,24 @@ var Image = function(imageName, imageLocation) {
 
 //images array
 var images = [];
-images.push(new Image('Bag', 'bag.jpg'))
-images.push(new Image('Banana', 'banana.jpg'))
-images.push(new Image('Boots', 'boots.jpg'))
-images.push(new Image('Chair', 'chair.jpg'))
-images.push(new Image('Cthulhu', 'cthulhu.jpg'))
-images.push(new Image('Dragon', 'dragon.jpg'))
-images.push(new Image('Pen', 'pen.jpg'))
-images.push(new Image('Scissors', 'scissors.jpg'))
-images.push(new Image('Shark', 'shark.jpg'))
-images.push(new Image('Sweep', 'sweep.jpg'))
-images.push(new Image('Unicorn', 'unicorn.jpg'))
-images.push(new Image('Usb', 'usb.jpg'))
-images.push(new Image('Water Can', 'water_can.jpg'))
-images.push(new Image('Wine Glass', 'wine_glass.jpg'))
+if (localStorage.getItem('images') == null) {
+  images.push(new Image('Bag', 'bag.jpg'))
+  images.push(new Image('Banana', 'banana.jpg'))
+  images.push(new Image('Boots', 'boots.jpg'))
+  images.push(new Image('Chair', 'chair.jpg'))
+  images.push(new Image('Cthulhu', 'cthulhu.jpg'))
+  images.push(new Image('Dragon', 'dragon.jpg'))
+  images.push(new Image('Pen', 'pen.jpg'))
+  images.push(new Image('Scissors', 'scissors.jpg'))
+  images.push(new Image('Shark', 'shark.jpg'))
+  images.push(new Image('Sweep', 'sweep.jpg'))
+  images.push(new Image('Unicorn', 'unicorn.jpg'))
+  images.push(new Image('Usb', 'usb.jpg'))
+  images.push(new Image('Water Can', 'water_can.jpg'))
+  images.push(new Image('Wine Glass', 'wine_glass.jpg'))
+} else {
+  images = JSON.parse(localStorage.getItem('images'));
+}
 
 //function to get one random image from the images array
 function getRandomImage() {
@@ -79,9 +83,10 @@ function registerImageClick(event) {
       if (images[index].imageLocation.indexOf(imageLocation) != -1) {
         images[index].y += 1;
         voteCounter += 1;
+        localStorage.setItem('images', JSON.stringify(images));
       }
     }
-    if (voteCounter == 15) {
+    if (voteCounter % 15 === 0) {
       alert('Voting Complete! See results below.')
       addChart();
     } else {
@@ -104,6 +109,8 @@ function addChart () {
 	});
 	chart.render();
 }
+
+
 
 window.addEventListener('load', buildCarousel);
 window.addEventListener('load', addListener);
